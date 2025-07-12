@@ -1,0 +1,819 @@
+/* Temel Stiller */
+:root {
+  --primary-color: #ff6b6b;
+  --secondary-color: #6c5ce7;
+  --accent-color: #ffeaa7;
+  --text-color: #2d3436;
+  --light-text: #636e72;
+  --bg-color: #fff;
+  --dark-bg: #121212;
+  --dark-card: #1e1e1e;
+  --dark-text: #f1f1f1;
+  --dark-light-text: #a0a0a0;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+  transition: var(--transition);
+  scroll-behavior: smooth;
+}
+
+/* Gece Modu */
+body.dark-mode {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: var(--dark-text);
+}
+
+body.dark-mode p,
+body.dark-mode blockquote {
+  color: var(--dark-light-text);
+}
+
+body.dark-mode .countdown-card,
+body.dark-mode .quote-card,
+body.dark-mode .message-card,
+body.dark-mode .timeline-content,
+body.dark-mode .gallery-overlay .gallery-info {
+  background-color: var(--dark-card);
+  color: var(--dark-text);
+}
+
+body.dark-mode .timeline-date {
+  background-color: var(--secondary-color);
+  color: var(--dark-text);
+}
+
+body.dark-mode .heading-line {
+  background-color: var(--primary-color);
+}
+
+body.dark-mode .music-playing-indicator {
+  background-color: rgba(30, 30, 30, 0.8);
+}
+
+/* Kahraman Bölüm (Hero) */
+.hero {
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../resim/couple-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  z-index: 2;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.couple-names {
+  font-family: "Dancing Script", cursive;
+  font-weight: 700;
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.love-quote {
+  font-size: 1.5rem;
+  font-style: italic;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.day-counter {
+  font-size: 1.2rem;
+  font-weight: 400;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  padding: 10px 20px;
+  border-radius: 50px;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+/* Scroll Down Indicator */
+.scroll-down-container {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: white;
+  z-index: 10;
+}
+
+.scroll-text {
+  font-size: 1rem;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.scroll-arrow {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.scroll-arrow span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg);
+  animation: scrollDown 2s infinite;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.scroll-arrow span:nth-of-type(1) {
+  animation-delay: 0s;
+}
+
+.scroll-arrow span:nth-of-type(2) {
+  top: 16px;
+  animation-delay: 0.15s;
+}
+
+.scroll-arrow span:nth-of-type(3) {
+  top: 32px;
+  animation-delay: 0.3s;
+}
+
+@keyframes scrollDown {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Müzik Çalıyor Göstergesi */
+.music-playing-indicator {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  padding: 10px 15px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.music-playing-indicator.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.music-note {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-right: 5px;
+  animation: musicNote 1s infinite alternate;
+}
+
+.music-note:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.music-note:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.now-playing {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin-left: 5px;
+}
+
+@keyframes musicNote {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Bölüm Başlıkları */
+.section-heading {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.section-heading h2 {
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+}
+
+.heading-line {
+  width: 80px;
+  height: 4px;
+  background-color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+/* Hikayemiz Bölümü */
+.story-section {
+  position: relative;
+}
+
+.story-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.first-meet-image {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: white;
+  padding: 20px;
+  font-size: 0.9rem;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  width: 4px;
+  background-color: var(--primary-color);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  padding: 10px 40px;
+  position: relative;
+  width: 50%;
+  box-sizing: border-box;
+  margin-bottom: 30px;
+}
+
+.timeline-item:nth-child(odd) {
+  left: 0;
+}
+
+.timeline-item:nth-child(even) {
+  left: 50%;
+}
+
+.timeline-date {
+  position: absolute;
+  width: 120px;
+  background-color: var(--secondary-color);
+  color: white;
+  text-align: center;
+  padding: 8px 0;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.timeline-item:nth-child(odd) .timeline-date {
+  right: -60px;
+}
+
+.timeline-item:nth-child(even) .timeline-date {
+  left: -60px;
+}
+
+.timeline-content {
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
+.timeline-content h3 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.timeline-content p {
+  margin: 0;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.timeline-image {
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+.timeline-image img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.timeline-image img:hover {
+  transform: scale(1.05);
+}
+
+/* Galeri */
+.gallery-section {
+  overflow: hidden;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: var(--transition);
+  height: 250px;
+}
+
+.gallery-item:hover {
+  transform: scale(1.03);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  padding: 20px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-info {
+  color: white;
+}
+
+.gallery-info h5 {
+  margin: 0;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.gallery-info p {
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+/* Video Bölümü */
+.video-section {
+  background-color: var(--secondary-color);
+  padding: 80px 0;
+  position: relative;
+}
+
+.video-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.video-playlist {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.video-thumbnail {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.video-thumbnail:hover {
+  transform: translateY(-5px);
+}
+
+.video-thumbnail img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+}
+
+.play-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 10px 0 10px 16px;
+  border-color: transparent transparent transparent var(--primary-color);
+}
+
+.video-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: white;
+  padding: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Aşk Sözleri Slider */
+.quotes-swiper {
+  padding-bottom: 50px;
+}
+
+.quote-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quote-text {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.quote-author {
+  font-size: 0.9rem;
+  color: var(--light-text);
+}
+
+/* Özel Günler Sayaç */
+.countdown-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  height: 100%;
+}
+
+.countdown-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown-number {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+.countdown-label {
+  font-size: 0.8rem;
+  color: var(--light-text);
+}
+
+.countdown-date {
+  font-size: 0.9rem;
+  color: var(--light-text);
+  font-style: italic;
+}
+
+/* Mesaj Bölümü */
+.message-card {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.message-header {
+  background-color: var(--primary-color);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.message-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid white;
+}
+
+.message-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.message-info {
+  color: white;
+}
+
+.message-name {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.message-date {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.message-body {
+  padding: 30px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.message-signature {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.5rem;
+  text-align: right;
+  color: var(--primary-color);
+  margin-top: 20px;
+}
+
+/* Footer */
+footer {
+  background-color: var(--primary-color);
+  color: white;
+  position: relative;
+}
+
+.copyright {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.heart-animation {
+  position: relative;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.heart-animation .heart {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  transform-origin: center;
+  animation: heartbeat 1.5s infinite;
+  clip-path: path(
+    "M15,8 C15,5.2385763 12.7614237,3 10,3 C7.2385763,3 5,5.2385763 5,8 C5,12 10,16 15,20 C20,16 25,12 25,8 C25,5.2385763 22.7614237,3 20,3 C17.2385763,3 15,5.2385763 15,8 Z"
+  );
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: translateX(-50%) scale(0.8);
+  }
+  5% {
+    transform: translateX(-50%) scale(0.9);
+  }
+  10% {
+    transform: translateX(-50%) scale(0.8);
+  }
+  15% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(0.8);
+  }
+  100% {
+    transform: translateX(-50%) scale(0.8);
+  }
+}
+
+/* Floating Controls */
+.floating-controls {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.control-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: var(--transition);
+}
+
+.control-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.control-btn.active {
+  background-color: var(--secondary-color);
+}
+
+.music-icon,
+.theme-icon {
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.music-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M9 18V5l12-2v13'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Ccircle cx='18' cy='16' r='3'/%3E%3C/svg%3E");
+}
+
+.theme-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z'/%3E%3C/svg%3E");
+}
+
+/* Responsive Tasarım */
+@media (max-width: 992px) {
+  .couple-names {
+    font-size: 4rem;
+  }
+
+  .timeline::before {
+    left: 30px;
+  }
+
+  .timeline-item {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 0;
+  }
+
+  .timeline-item:nth-child(even) {
+    left: 0;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-date,
+  .timeline-item:nth-child(even) .timeline-date {
+    left: -30px;
+    top: -40px;
+    width: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .couple-names {
+    font-size: 3rem;
+  }
+
+  .love-quote {
+    font-size: 1.2rem;
+  }
+
+  .day-counter {
+    font-size: 1rem;
+  }
+
+  .section-heading h2 {
+    font-size: 2rem;
+  }
+
+  .quote-text {
+    font-size: 1.5rem;
+  }
+
+  .countdown-number {
+    font-size: 1.5rem;
+  }
+
+  .music-playing-indicator {
+    left: 10px;
+    top: 10px;
+    padding: 8px 12px;
+  }
+
+  .now-playing {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .couple-names {
+    font-size: 2.5rem;
+  }
+
+  .floating-controls {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .control-btn {
+    width: 45px;
+    height: 45px;
+  }
+
+  .gallery-item {
+    height: 200px;
+  }
+}
